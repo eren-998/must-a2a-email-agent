@@ -1,7 +1,7 @@
 <div align="center">
   <h1>🚀 Must-A2A: Autonomous AI Email Orchestrator</h1>
   <p><b>An AI-Native Forward Deployed Agent built for true APOs.</b></p>
-  <p><i>This repository represents the completed Quest for the FDE/APO Role at MUST Company.</i></p>
+  <p><i>This repository represents the completed Quest.</i></p>
 </div>
 
 <br>
