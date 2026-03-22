@@ -102,26 +102,22 @@ pie title "Operational Efficiency Distribution"
 
 ---
 
-## 🛠️ 7. End-to-End Setup Guide (Zero to Autonomy)
+## 🛠️ 7. End-to-End Setup Guide
 
 Connecting your custom brain to Telegram is designed to be frictionless.
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor User as You (APO)
-    participant TF as Telegram (@BotFather)
-    participant UI as Dashboard UI
-    participant DB as SQLite Backend
-    
-    User->>TF: Create Bot (/newbot)
-    TF-->>User: Returns BOT_TOKEN
-    User->>UI: Paste BOT_TOKEN in Settings
-    UI->>DB: Stores & Initializes Agent
-    User->>TF: Send "/start" to your new Bot
-    TF-->>DB: Registers CHAT_ID automatically
-    UI->>DB: Input LLM API Keys (Groq/OpenAI)
-    DB-->>User: Agent is Live 🚀
+graph LR
+    A[🤖 1. Get Token<br>From @BotFather] --> B[💻 2. Run Backend<br>npm run dev]
+    B --> C[🖥️ 3. Run Frontend<br>npm run dev]
+    C --> D[⚙️ 4. Config UI<br>Paste Tokens]
+    D --> E[📱 5. Message Bot<br>Ready to Go!]
+
+    style A fill:#42b883,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#34495e,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#34495e,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#4ecdc4,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 ### **Step-by-Step Walkthrough:**
