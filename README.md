@@ -137,7 +137,7 @@ graph LR
 2. Select your weapon of choice (e.g., *Groq* for blazing fast Llama 3 execution, or *OpenAI* for GPT-4).
 3. Paste the corresponding API Key. 
 
-** Phase 4: Standing up the Repository locally**
+**Phase 4: Standing up the Repository locally**
 Open your terminal at the root of the project:
 
 ```bash
@@ -154,3 +154,40 @@ npm run dev
 ```
 
 *The Agent is now fully orchestrated and autonomously listening for incoming emails.*
+
+---
+
+## 📧 8. Connecting Email Accounts
+
+To start managing your inbox, you need to connect your email accounts through the dashboard.
+
+### **A. Google (Gmail) - OAuth 2.0**
+1.  **Google Cloud Console:** Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2.  **Create Project:** Create a new project or select an existing one.
+3.  **Enable API:** Search for "Gmail API" and click **Enable**.
+4.  **OAuth Consent Screen:** 
+    -   Set User Type to **External** (unless you have a Google Workspace).
+    -   Add `gmail.readonly`, `gmail.send`, and `gmail.modify` scopes.
+    -   Add your email as a **Test User**.
+5.  **Credentials:**
+    -   Click **Create Credentials** -> **OAuth client ID**.
+    -   Select **Web application**.
+    -   **Authorized Redirect URIs:** Add `http://localhost:3000/api/auth/gmail/callback`.
+6.  **Configure Agent:** Copy the **Client ID** and **Client Secret** into the Agent Dashboard under **Email Settings**.
+
+### **B. Microsoft (Outlook/Hotmail) - Azure App**
+1.  **Azure Portal:** Go to [Azure App Registrations](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade).
+2.  **New Registration:** 
+    -   Name your app (e.g., `Must-A2A-Email-Agent`).
+    -   Supported account types: **Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)**.
+    -   **Redirect URI:** Select **Web** and add `http://localhost:3000/auth/outlook/callback`.
+3.  **API Permissions:** Add `Mail.Read`, `Mail.Send`, and `Mail.ReadWrite` (Microsoft Graph). Click **Grant admin consent**.
+4.  **Certificates & Secrets:** Create a new **Client Secret**.
+5.  **Configure Agent:** Copy the **Application (client) ID** and the **Secret Value** into the Agent Dashboard.
+
+### **C. Custom Domain (IMAP/SMTP)**
+For custom email providers (e.g., Zoho, Namecheap, Private Email), use standard IMAP/SMTP settings:
+1.  **IMAP Host:** e.g., `imap.yourdomain.com` (Port: `993`, SSL enabled).
+2.  **SMTP Host:** e.g., `smtp.yourdomain.com` (Port: `587` or `465`).
+3.  **Credentials:** Your full email address and your password (or **App Password** if 2FA is enabled).
+4.  **Configure Agent:** Enter these details in the **Custom Email** section of the Dashboard.
