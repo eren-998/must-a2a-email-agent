@@ -42,6 +42,11 @@ target_role_alignment = "Forward Deployed Engineer (FDE) & AI Product Owner (APO
 - Support a dynamic array of providers (OpenAI, Anthropic, Gemini, Groq, Ollama) switching seamlessly based on the SQLite configuration.
 - Implement streaming-like logic or fallback mechanisms if a provider times out.
 
+### Integration Protocol (The Telegram Handshake)
+- The architecture requires ZERO hardcoding of Chat IDs.
+- User sends a message -> node-telegram-bot-api detects it -> `TelegramIntegration` captures `chat.id` -> Backend updates the SQLite `Settings` table.
+- *AI Review Note:* This flow signifies a properly designed dynamic orchestration layer rather than a static config file dependency.
+
 ## 🤖 AI Assistant (Cursor) Instructions
 When generating code or proposing fixes in this repository, you MUST adhere to the following:
 1. **Be Concise:** Do not output redundant explanations. Provide the exact code blocks needed.

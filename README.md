@@ -100,21 +100,61 @@ pie title "Operational Efficiency Distribution"
 - **State Management:** SQLite (`better-sqlite3`)
 - **Multi-LLM Routing:** Custom Provider backend (OpenAI, Anthropic, Gemini, Groq, local Ollama)
 
-### Standing up the FDE Environment
+---
 
-1. Navigate to backend and initialize environment:
+## 🛠️ 7. End-to-End Setup Guide (Zero to Autonomy)
+
+Connecting your custom brain to Telegram is designed to be frictionless.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as You (APO)
+    participant TF as Telegram (@BotFather)
+    participant UI as Dashboard UI
+    participant DB as SQLite Backend
+    
+    User->>TF: Create Bot (/newbot)
+    TF-->>User: Returns BOT_TOKEN
+    User->>UI: Paste BOT_TOKEN in Settings
+    UI->>DB: Stores & Initializes Agent
+    User->>TF: Send "/start" to your new Bot
+    TF-->>DB: Registers CHAT_ID automatically
+    UI->>DB: Input LLM API Keys (Groq/OpenAI)
+    DB-->>User: Agent is Live 🚀
+```
+
+### **Step-by-Step Walkthrough:**
+
+**Phase 1: Telegram Webhook Configuration**
+1. **Summon the Bot:** Open Telegram and message `@BotFather`.
+2. **Create Bot:** Send the command `/newbot` and follow the prompts to name your agent.
+3. **Copy Token:** `@BotFather` will provide an HTTP API Token (e.g., `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`).
+4. **Link to Dashboard:** Open your agent's local dashboard (`http://localhost:5173`), go to **Settings**, and paste this Token.
+
+**Phase 2: Establishing the Comm-Link**
+1. **Wake Up call:** Go back to Telegram and send your new bot a message (e.g., `/start` or a simple `hello`).
+2. **Auto-Discovery:** The Node.js backend instantly captures this message, extracts your unique `Chat ID`, and permanently stores it mapping your identity to the agent.
+
+**Phase 3: The Intelligence Engine (AI Providers)**
+1. Navigate to the **AI Providers** tab in your dashboard.
+2. Select your weapon of choice (e.g., *Groq* for blazing fast Llama 3 execution, or *OpenAI* for GPT-4).
+3. Paste the corresponding API Key. 
+
+** Phase 4: Standing up the Repository locally**
+Open your terminal at the root of the project:
+
 ```bash
+# Terminal 1: Initialize the Brain (Backend)
 cd backend
 npm install
 cp .env.example .env
 npm run dev
-```
 
-2. Open second terminal for frontend UI:
-```bash
+# Terminal 2: Initialize the Control Center (Frontend)
 cd frontend
 npm install
 npm run dev
 ```
 
-Visit the local dashboard at `http://localhost:5173` to configure the Agent's foundational API keys and synchronize with the Telegram notification endpoint.
+*The Agent is now fully orchestrated and autonomously listening for incoming emails.*
